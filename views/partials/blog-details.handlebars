@@ -1,7 +1,8 @@
+const Handlebars = require('handlebars');
 <section class="card">
     <h3>
   <a href=""/article/{{id}}">Article {{id}}: {{title}}</a>
     </h3>
-    <p>{{username}}: {{date_created}}</p>
+    <p>{{user.username}}: {{format_time date_created}}</p>
   </a>
 </section>

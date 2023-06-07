@@ -1,8 +1,8 @@
 <!-- We are tracking the number of times we visit this homepage -->
 <h3>Number of times you've visited this homepage: {{countVisit}}</h3>
 
-<section class="galleries">
-  {{#each galleries as |gallery|}}
+<section class="blog">
+  {{#each posts as |post|}}
   {{> blog-details}}
   {{/each}}
 </section>
