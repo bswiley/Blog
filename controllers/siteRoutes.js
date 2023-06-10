@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const withAuth = require('../utils/auth');
 const { Blog, Comment, User } = require('../models');
 
 // GET all galleries for homepage
@@ -28,28 +29,24 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one gallery
-router.get('/gallery/:id', async (req, res) => {
+// GET one blog
+router.get('/blog/:id',withAuth, async (req, res) => {
   try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
+    const blogData = await Blog.findByPk(req.params.id, {
       include: [
         {
-          model: Painting,
+          model: User,
           attributes: [
-            'id',
-            'title',
-            'artist',
-            'exhibition_date',
-            'filename',
-            'description',
+            'username'
           ],
         },
       ],
     });
 
-    const gallery = dbGalleryData.get({ plain: true });
+    const blog = blogData.get({ plain: true });
     // Send over the 'loggedIn' session variable to the 'gallery' template
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
+    res.render('blog', { blog, loggedIn: req.session.loggedIn });
+    console.log(blog);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

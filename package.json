@@ -20,6 +20,7 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.7",
     "handlebars-helpers": "^0.10.0",
+    "mime": "^3.0.0",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"
   },

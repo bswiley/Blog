@@ -1,0 +1,12 @@
+<section class="container">
+  <!-- We are not counting the number of times we visit this page -->
+  <!-- But we are showing the number of times we visited the homepage -->
+  <h3>Number of times you've visited the homepage: {{countVisit}}</h3>
+
+  <h3 class="blog-title">{{blog.title}}</h3>
+  <h4>Author: {{user.username}}{{date_created}}</h4>
+  <p>{{format_time date_created}}</p>
+    <section class="flex-row justify-center">
+        {{blog.text}}
+      </section>
+</section>

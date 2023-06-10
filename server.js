@@ -1,3 +1,4 @@
+const mime = require('mime');
 const express = require('express');
 const session = require('express-session');
 const routes = require('./controllers');
@@ -31,3 +32,10 @@ app.set('view engine', 'handlebars');
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
+app.use(express.static('public', {
+  setHeaders: (res, path)=> {
+    if (mime.getType(path)=== 'application/javascript') {
+      res. setHeader('content-Type', 'application/javascript');
+          }
+  }
+}));
