@@ -5,13 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
-  <link rel="stylesheet" type="text/css" href="../../public/css/jass.css">
-  <link rel="stylesheet" type="text/css" href="../../public/css/style.css">
+    <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body> <header>
    <nav>
-    <a href="/">Home</a><a href="/Dashboard">Dashboard</a>
+    <a href="/">Home</a>
+    <a href="/Dashboard">Dashboard</a>
+    {{#if req.session.logged_in}}
+    <a href="/logout">Log Out</a>
+    {{/if}}
+   
   </nav>
  
     <h1>Tech Blog</h1>
