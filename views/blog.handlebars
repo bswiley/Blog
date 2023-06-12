@@ -3,9 +3,14 @@
   <!-- But we are showing the number of times we visited the homepage -->
   <h3>Number of times you've visited the homepage: {{countVisit}}</h3>
 
-  <h3 class="blog-title">{{blog.title}}</h3>
-  <h4>Author: {{user.username}}{{date_created}}</h4>
+  <h3 class="blog-title">{{post.title}}</h3>
+  <h4>Author: {{post.user.username}} Date:{{format_date post.date_created}}</h4>
       <section class="flex-row justify-center">
-        {{blog.description}}
+        {{post.text}}
       </section>
+  <section>
+  {{#each comments as |comment|}}
+  {{>comment-details comment}}
+  {{/each}}
+  </section>
 </section>

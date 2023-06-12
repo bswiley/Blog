@@ -31,25 +31,41 @@ router.get('/', async (req, res) => {
 // GET one blog
 router.get("/blog/:id", async (req, res) => {
   try {
-    const blogData = await Blog.findByPk(
-      req.params.id,{ include: [
-        User,
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
         {
           model: Comment,
-          include: [User],
-        },
-      ],
+          attributes: ['id', 'title', 'text', 'date_created'],
+          include: [User]
+        }
+      ]
     });
-  
 
     const post = blogData.get({ plain: true });
-    console.log (post);
+
+    const commentData = await Comment.findAll({
+      where: { blog_id: req.params.id },
+      include: [User]
+    });
+
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
+    const date = comments[0].date_created
+    console.log(post);
+    console.log(comments);
+    console.log("date = "+date);
+
+    
     // Send over the 'loggedIn' session variable to the 'homepage' template
-    res.render('blog', { post, loggedIn: req.session.loggedIn });
-  }catch (err) {
+    res.render('blog', { post, comments, date, loggedIn: req.session.loggedIn });
+  } catch (err) {
     console.log(err);
     res.status(500).json(err);
-  }});
+  }
+});
 
 // Login route
 router.get('/login', (req, res) => {
