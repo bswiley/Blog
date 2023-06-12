@@ -29,20 +29,21 @@ router.get('/', async (req, res) => {
 });
 
 // GET one blog
-router.get('/blog/:id', async (req, res) => {
+router.get("/blog/:id", async (req, res) => {
   try {
     const blogData = await Blog.findByPk(
       req.params.id,{ include: [
+        User,
         {
-          model: User,
-          attributes: ['username',],
+          model: Comment,
+          include: [User],
         },
       ],
     });
   
 
     const post = blogData.get({ plain: true });
-    console.log (blog);
+    console.log (post);
     // Send over the 'loggedIn' session variable to the 'homepage' template
     res.render('blog', { post, loggedIn: req.session.loggedIn });
   }catch (err) {
