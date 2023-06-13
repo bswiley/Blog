@@ -1,29 +1,27 @@
-const loginFormHandler = async (event) => {
-    event.preventDefault();
+document.getElementById('login-form').addEventListener('submit', async function(event) {
+  event.preventDefault(); // Prevent form submission
 
-  
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
-  const username = document.querySelector('#username-signup').value.trim();
-  const semail = document.querySelector('#email-signup').value.trim();
-  const spassword = document.querySelector('#password-signup').value.trim();
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
 
-  if (email && password) {
-    
-    const response = await fetch('/users/users/login', {
-      method: 'PUT',
-      body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
+  try {
+    // Make an asynchronous fetch request to the server
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: username, password: password })
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      // Successful login
+      alert('Login successful!');
     } else {
-      alert('Failed to log in');
+      // Failed login
+      alert('Login failed!');
     }
+  } catch (error) {
+    console.error('Error:', error);
   }
-};
-
-document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+});
