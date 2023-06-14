@@ -10,8 +10,8 @@
        <h4> {{post.text}}</h4>
       </section>
   <section>
-  {{#each post as |comment|}}
-  {{>comment-details comment}}
+  {{#each post.comments as |comment|}}
+    {{>comment-details comment}}
   {{/each}}
   </section>
 </section>
