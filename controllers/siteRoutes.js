@@ -39,11 +39,14 @@ router.get("/blog/:id", async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['id', 'title', 'text', 'date_created'],
-          include: [User]
+          attributes: ['text', 'date_created'],
+          include: [
+            { 
+              model:User
+              attributes: ['username'],
         }
       ]
-    });
+  }]});
 
     const post = blogData.get({ plain: true });
 

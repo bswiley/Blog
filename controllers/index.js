@@ -4,6 +4,6 @@ const siteRoutes = require('./siteRoutes');
 const login = require ('./login');
 
 router.use('/', siteRoutes);
-router.use('/user', userRoutes);
+router.use('/api', userRoutes);
 
 module.exports = router;
