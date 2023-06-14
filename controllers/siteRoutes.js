@@ -42,28 +42,17 @@ router.get("/blog/:id", async (req, res) => {
           attributes: ['text', 'date_created'],
           include: [
             { 
-              model:User
+              model:User,
               attributes: ['username'],
         }
       ]
-  }]});
+  }]})
 
     const post = blogData.get({ plain: true });
-
-    const commentData = await Comment.findAll({
-      where: { blog_id: req.params.id },
-      include: [User]
-    });
-
-    const comments = commentData.map((comment) => comment.get({ plain: true }));
-    const date = comments[0].date_created
-    console.log(post);
-    console.log(comments);
-    console.log("date = "+date);
-
-    
+    console.log(JSON.stringify(post, null, 2));
+   
     // Send over the 'loggedIn' session variable to the 'homepage' template
-    res.render('blog', { post, comments, date, loggedIn: req.session.loggedIn });
+    res.render('blog', { post, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
