@@ -17,11 +17,12 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
     // Send over the 'loggedIn' session variable to the 'homepage' template
-    console.log (posts)
-    res.render('homepage', {
-      posts,
-      loggedIn: req.session.loggedIn,
-    });
+    console.log(posts);
+    res.status(200).json(posts);
+    // res.render('homepage', {
+    //   posts,
+    //   loggedIn: req.session.loggedIn,
+    // });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one blog
-router.get("/blog/:id", async (req, res) => {
+router.get("/Post/:id", async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
@@ -42,32 +43,84 @@ router.get("/blog/:id", async (req, res) => {
           attributes: ['text', 'date_created'],
           include: [
             { 
-              model:User,
+              model: User,
               attributes: ['username'],
+            }
+          ]
         }
       ]
-  }]})
-
+    });
     const post = blogData.get({ plain: true });
     console.log(JSON.stringify(post, null, 2));
-   
+    res.status(200).json(post);
+    // res.render('Post', { post, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+//Dashboard Get
+router.get('/Dashboard', async (req, res) => {
+  try {
+    const blogData = await Blog.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+    const posts = blogData.map((post) =>
+      post.get({ plain: true })
+    );
     // Send over the 'loggedIn' session variable to the 'homepage' template
-    res.render('blog', { post, loggedIn: req.session.loggedIn });
+    console.log(posts);
+    res.status(200).json(posts);
+    // res.render('homepage', {
+    //   posts,
+    //   loggedIn: req.session.loggedIn,
+    // });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-// Login route
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect to the homepage
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  // Otherwise, render the 'login' template
-  res.render('login');
+//Create new Post Get
+router.get('/create', withAuth, async (req, res) => {
+  res.status(200).json({ logged_in: req.session.logged_in });
 });
+
+//Update Post by id Get
+router.get('/update/:id', async (req, res) => {
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+    const post = blogData.get({ plain: true });
+    // Send over the 'loggedIn' session variable to the 'homepage' template
+    console.log(post);
+    res.status(200).json(post);
+    // res.render('homepage', {
+    //   post,
+    //   loggedIn: req.session.loggedIn,
+    // });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+
+
+
 
 module.exports = router;

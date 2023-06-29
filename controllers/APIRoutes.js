@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User } = require('../models');
 
-router.post('/users/login', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -18,7 +18,7 @@ router.post('/users/login', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where:{ email: req.body.email }});
+    const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {
       res
@@ -45,6 +45,38 @@ router.post('/login', async (req, res) => {
 
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+router.post('/signup', async (req, res) => {
+  try {
+    const userData = await User.create(req.body);
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/update/:id', async (req, res) => {
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+    const post = blogData.get({ plain: true });
+    // Send over the 'loggedIn' session variable to the 'homepage' template
+    console.log(post);
+    res.status(200).json(post);
+    // res.render('homepage', {
+    //   post,
+    //   loggedIn: req.session.loggedIn,
+    // });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 

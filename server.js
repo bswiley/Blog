@@ -25,10 +25,9 @@ const sess = {
 
 handlebars.registerHelper('format_date', format_date);
 app.use(session(sess));
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
