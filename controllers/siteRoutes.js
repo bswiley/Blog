@@ -79,10 +79,11 @@ router.get('/dashboard', async (req, res) => {
     );
     // Send over the 'loggedIn' session variable to the 'homepage' template
     console.log(posts);
-    // res.status(200).json(posts);
+    // res.status(200).json(post);
     res.render('dashboard', {
       posts,
       loggedIn: req.session.loggedIn,
+      layout: "main"
     });
   } catch (err) {
     console.log(err);
