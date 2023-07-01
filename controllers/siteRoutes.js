@@ -65,7 +65,7 @@ router.get("/post/:id", async (req, res) => {
 router.get('/dashboard', async (req, res) => {
   try {
     const blogData = await Blog.findAll({
-      where: { user_id: req.session.user_id },
+      where: { user_id: 2 },
       attributes: { exclude: ["password"] },
       include: [
         {
