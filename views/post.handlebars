@@ -1,0 +1,55 @@
+<div class="">
+  <div class="card">
+    <h3 class="card-title">{{concept.title}}<h3>
+    <h5 class="card-user" id="author">
+      <a href="/user/{{concept.creator.username}}">By: {{concept.creator.username}}</a>
+    </h5>
+    <p> Description: {{{concept.text}}}</p>
+  </div>
+</div>
+
+<div>
+  <div class="card">
+    <h3>Comments:</h3>
+    {{#each concept.comments as |comment|}}
+      <div class="card">
+        <h6> Comment added {{comment.createdAt}} by {{comment.creator.username}} </h6>
+        <p>{{comment.comment}} </p>
+      </div>
+    {{/each}}
+    <form class="form create-form">
+      <div class="form-group">
+        <label>Add Comment:</label>
+        <textarea class="form-input" type="text" id="new-comment" rows="2"></textarea>
+      </div>
+    </form>
+    <button id="postComment" class="btn btn-primary" type="button">Post Comment</button>
+  </div>
+</div>
+
+<script>
+  const addCommentFormHandler = async (event) => {
+    console.log(`triggered add comment form handler`)
+    event.preventDefault();
+  
+    const newComment = document.querySelector('#new-comment').value.trim();
+    console.log(newComment);
+
+    if (newComment.length > 0) {
+        const response = await fetch('/api/sparks/comment/' + {{concept.id}}, {
+            method: 'POST',
+            body: `{"comment": "${newComment}"}`,
+            headers: { 'Content-Type': 'application/json' },
+        });
+        console.log(response)
+        if (response.ok) {
+            document.location.reload();
+        } else {
+            alert('Could not post data');
+        }
+    }
+  };
+  document
+    .querySelector('#postComment')
+    .addEventListener('click', addCommentFormHandler);
+</script>
