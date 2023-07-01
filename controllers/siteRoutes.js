@@ -18,7 +18,10 @@ router.get('/', async (req, res) => {
     );
     // Send over the 'loggedIn' session variable to the 'homepage' template
     console.log(posts);
-    res.status(200).json(posts);
+    res.res.render('home',{
+      posts,
+      layout: 'main',
+      logged_in: reg.session.logged_in};
     // res.render('homepage', {
     //   posts,
     //   loggedIn: req.session.loggedIn,
