@@ -1,0 +1,28 @@
+<div class="">
+  <div class="card">
+    <h3 class="card-title">{{post.title}}<h3>
+    <h5 class="card-user" id="author">
+      <a href="/user/{{post.user.username}}">By: {{post.user.username}}</a>
+    </h5>
+    <p> Description: {{{post.text}}}</p>
+  </div>
+</div>
+
+<div>
+  <div class="cardholder">
+    <h3>Comments:</h3>
+    {{#each post.comments as |comment|}}
+      <div class="card">
+        <h6> Comment added {{comment.date_created}} by {{comment.user.username}} </h6>
+        <p>{{comment.text}} </p>
+      </div>
+    {{/each}}
+    <form class="form create-form">
+      <div class="form-group">
+        <label>Add Comment:</label>
+        <textarea class="form-input" type="text" id="new-comment" rows="2"></textarea>
+      </div>
+    </form>
+    <button id="postComment" class="btn btn-primary" type="button">Post Comment</button>
+  </div>
+</div>
