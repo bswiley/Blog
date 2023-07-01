@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one blog
-router.get("/Post/:id", async (req, res) => {
+router.get("/post/:id", async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
@@ -60,7 +60,7 @@ router.get("/Post/:id", async (req, res) => {
   }
 });
 //Dashboard Get
-router.get('/Dashboard', async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
     const blogData = await Blog.findAll({
       where: { user_id: req.session.user_id },

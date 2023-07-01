@@ -1,0 +1,23 @@
+<!--This is our navigation bar, this ought to change the way our page works -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="/css/jass.css">
+</head>
+
+
+<div class="row align-center mb-5">
+  <!--Is our Menu for selection here? -->
+  {{#each posts as |post|}}
+    <a href="/post/{{post.id}}">
+      <div class="card">
+          <h3 class="card-title">{{post.title}}<h3>
+          <h3 class="card-user">{{post.user.username}}</h3>
+          <p class="card-body">
+              {{post.text}}
+          </p>
+      </div>
+    </a>
+  {{/each}}
+</div>
