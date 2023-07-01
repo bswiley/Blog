@@ -9,6 +9,17 @@
     /* background color */
     --background: #B2beb5;
 }
+.centered-div {
+    width: 75%;
+    margin: 0 auto;
+   box-sizing: border-box;
+
+.blogpost-div {
+    width: 100%
+}
+
+  
+}
 h1 {
       text-align: center;
       margin-top: 0.5in;
@@ -88,12 +99,10 @@ h1 {
 }
 .card {
     /* Add shadows to create the "card" effect */
-    background-color: #FFFFF0
+    background-color: #FFFFF0;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    min-width: 400px;
-    max-width: 800px;
-    width: 70%;
+    width: 100%;
 }
 .card-user {
     text-align: left;

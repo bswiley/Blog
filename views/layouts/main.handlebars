@@ -16,7 +16,9 @@
     {{#if req.session.logged_in}}
     <a href="/logout">Log Out</a>
     {{/if}}
-   
+    {{#unless req.session.logged_in}}
+   <a href="/login">Log In</a>
+   {{/unless}}
   </nav>
  
     <h1>Tech Blog</h1>
@@ -26,7 +28,7 @@
     <aside>
       <h2>Enjoy the post</h2>
     </aside>
-    <div class="blog">
+    <div class="centered-div">
       {{{body}}}
     </div>
   </main>

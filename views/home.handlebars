@@ -7,7 +7,7 @@
 </head>
 
 
-<div class="row align-center mb-5">
+<div class="blogpost-div">
   <!--Is our Menu for selection here? -->
   {{#each posts as |post|}}
     <a href="/post/{{post.id}}">
@@ -18,6 +18,5 @@
               {{post.text}}
           </p>
       </div>
-    </a>
   {{/each}}
 </div>
