@@ -49,10 +49,10 @@ router.get("/post/:id", async (req, res) => {
         }
       ]
     });
-    const posts = blogData.get({ plain: true });
-    console.log(JSON.stringify(posts, null, 2));
+    const post = blogData.get({ plain: true });
+    console.log(JSON.stringify(post, null, 2));
     // res.status(200).json(post);
-    res.render('Post', {
+    res.render('post', {
        post, 
        loggedIn: req.session.loggedIn,
        layout: 'main' });

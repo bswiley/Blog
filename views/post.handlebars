@@ -1,20 +1,20 @@
 <div class="">
   <div class="card">
-    <h3 class="card-title">{{concept.title}}<h3>
+    <h3 class="card-title">{{post.title}}<h3>
     <h5 class="card-user" id="author">
-      <a href="/user/{{concept.creator.username}}">By: {{concept.creator.username}}</a>
+      <a href="/user/{{post.user.username}}">By: {{post.user.username}}</a>
     </h5>
-    <p> Description: {{{concept.text}}}</p>
+    <p> Description: {{{post.text}}}</p>
   </div>
 </div>
 
 <div>
   <div class="card">
     <h3>Comments:</h3>
-    {{#each concept.comments as |comment|}}
+    {{#each post.comments as |comment|}}
       <div class="card">
-        <h6> Comment added {{comment.createdAt}} by {{comment.creator.username}} </h6>
-        <p>{{comment.comment}} </p>
+        <h6> Comment added {{comment.date_created}} by {{comment.user.username}} </h6>
+        <p>{{comment.text}} </p>
       </div>
     {{/each}}
     <form class="form create-form">
@@ -36,7 +36,7 @@
     console.log(newComment);
 
     if (newComment.length > 0) {
-        const response = await fetch('/api/sparks/comment/' + {{concept.id}}, {
+        const response = await fetch('/api/sparks/comment/' + {{post.id}}, {
             method: 'POST',
             body: `{"comment": "${newComment}"}`,
             headers: { 'Content-Type': 'application/json' },
