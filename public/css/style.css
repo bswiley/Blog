@@ -52,7 +52,7 @@
     padding: 12px;
     font-weight: normal;
     vertical-align: top;
-    width: 200px
+    width: 200px;
   }
 .view:hover {
    text-decoration: none;
@@ -92,6 +92,10 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    display: inline-block;
+    padding: 12px;
+    font-weight: normal;
+    vertical-align: top;
     width: 200px;
   }
   

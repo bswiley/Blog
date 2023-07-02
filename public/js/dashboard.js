@@ -15,7 +15,7 @@ buttonSets.forEach((buttonSet) => {
   
       // Perform a POST API request with the retrieved information
       fetch('/api/update', {
-        method: 'POST',
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id: cardId,
