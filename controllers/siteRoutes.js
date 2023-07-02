@@ -115,8 +115,20 @@ router.get('/dashboard', async (req, res) => {
 });
 
 //Create new Post Get
-router.get('/create', withAuth, async (req, res) => {
-  res.status(200).json({ logged_in: req.session.logged_in });
+router.get('/create', async (req, res) => {
+  try {
+    const blogData = await User.findByPk(3);
+    const users = blogData.get({ plain: true });
+    // res.status(200).json(users);
+    res.render('create', { 
+      users,
+      logged_in: req.session.logged_in,
+      layout: 'main' 
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 //Update Post by id Get
@@ -143,6 +155,7 @@ router.get('/update/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 
 
