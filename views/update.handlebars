@@ -1,44 +1,23 @@
-<h2>New Spark</h2>
+<h2>Post Update</h2>
+<p>Make the corrections to your post in the blanks below and hit the "Update" button</p>
 
 <form class="form create-form">
   <div class="form-group">
-    <label>
-  <input type="checkbox" name="myCheckbox" value="1">
-  Public
-</label>
-  <div class="form-group">
     <label for="Title">Title</label>
-    <input class="form-input" placeholder="To create a 'Spark' fill out the title and description and then hit the 'Create Spark' button"type="text" id="spark-title" />
+    <input class="form-input" type="text" id="spark-title" value="{{post.title}}">
   </div>
   <div class="form-group">
-    <label for="Description">Project Description</label>
-    <textarea class="form-input" placeholder="To query Chatgpt for a project idea, type your query in the title bar and hit the 'Query Chatgpt' button.  Shortly thereafter you will recieve results in this field.  You can then edit the text, add a title and hit the 'Creat Spark' button to publish the idea."id="spark-text" rows="10"></textarea>
+    <label for="post-text">Post Text</label>
+    <textarea class="form-input" id="post-text" rows="20">{{post.text}}</textarea>
   </div>
-  <div class="form-group">
-    <label for"Outside link">Outside link to project (where people can get more information about the project)</label>
-    <input class="form-input" type="text" id="link"/>
-    </div>
-    <div class="form-group">
-    <label for"Chat-Link">Chat Link people can use to contact you for further discussion</label>
-    <input class="form-input" type="text" id="Chat"/>
-    </div>
+</form>
  
-  </div>
-  <div class="form-group">
-      <label for="categories">Category (select one):</label>
-  <select id="categories" name="dropdown">
-    <option value="software">software</option>
-    <option value="woodwork">woodwork</option>
-    <option value="metalwork">metalwork</option>
-    <option value="quilts">quilts</option>
-  </select>
-  </div>
+ 
+  
    <div class="form-group">
-    <button class="btn create" id ="create" type="button">Create Spark</button>
+    <button class="btn create" id ="create" type="button">Update</button>
 </div>
-<div class="form-group">
-    <button class="btn gpt" id = "gpt" type="button">Query Chatgpt</button>
 </div>
 </form>
 <script src="/js/create.js"></script>
-<script src="/js/query.js"></script>
+

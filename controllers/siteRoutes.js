@@ -28,9 +28,9 @@ router.get('/', async (req, res) => {
   }
 });
 // GET to update page
-router.get("/update/", async (req, res) => {
+router.get("/update/:id", async (req, res) => {
   try {
-    const blogData = await Blog.findByPk(req.body.id, {
+    const blogData = await Blog.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -40,11 +40,11 @@ router.get("/update/", async (req, res) => {
     });
     const post = blogData.get({ plain: true });
     console.log(JSON.stringify(post, null, 2));
-    res.status(200).json(post);
-    // res.render('post', {
-    //    post, 
-    //    loggedIn: req.session.loggedIn,
-    //    layout: 'main' });
+    // res.status(200).json(post);
+    res.render('update', {
+       post, 
+       loggedIn: req.session.loggedIn,
+       layout: 'main' });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
