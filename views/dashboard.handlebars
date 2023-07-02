@@ -4,16 +4,22 @@
 </aside>
 <div class="blogpost-div">
   <!--Is our Menu for selection here? -->
-      <div class="card {{post.id}}">
-          <h3 class="card-title">{{post.title}}<h3>
-          <p class="card-body">
+      <div class="card">
+          
+          <h3>
+            <span class="card-title">{{post.title}}</span> 
+            <span class ="card-id">{{post.id}}</span>
+            </h3>
+          <h4 class="card-body"></p>
+          <p class="card-text">
               {{post.text}}
-          </p>
+          </h4>
            <div class="button-container">
-    <button class="view">View Comments</button>
-    <button class="update">Update Post</button>
-    <button class="delete">Delete Post</button>
+    <a href="/post/{{post.id}}" class="view">View Comments</a>
+    <button class="update">Update</button>
+    <button class="delete">Delete</button>
   </div>
       </div>
   {{/each}}
 </div>
+<script src="/js/dashboard.js"></script>
