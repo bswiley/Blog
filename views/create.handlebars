@@ -1,15 +1,18 @@
 
-<h2>New Post</h2>
+<h2>
+  <span>New Post</span>
+  <span class="hide">{{users.id}}</span>
+  </h2>
 <p>Fill in the title and text and hit the "create" button at the bottom</p>
 
 <form class="form create-form">
   <div class="form-group">
     <label for="Title">Post Title</label>
-    <input class="form-input" type="text" id="spark-title" />
+    <input class="form-input" type="text" id="post-title" />
   </div>
   <div class="form-group">
     <label for="Description">Post Text</label>
-    <textarea class="form-input" id="spark-text" rows="20"></textarea>
+    <textarea class="form-input" id="post-text" rows="20"></textarea>
   </div>
   
   <div class="form-group">

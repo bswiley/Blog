@@ -1,4 +1,4 @@
-const makeSparkFormHandler = async (event) => {
+const makePostFormHandler = async (event) => {
     console.log(`triggered add comment form handler`)
     event.preventDefault();
   
@@ -35,4 +35,4 @@ const makeSparkFormHandler = async (event) => {
 };
 document
     .querySelector('#create')
-    .addEventListener('click', makeSparkFormHandler);
+    .addEventListener('click', makePostFormHandler);
