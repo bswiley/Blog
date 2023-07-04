@@ -1,23 +1,23 @@
 <h2>Post Update</h2>
-<p>Make the corrections to your post in the blanks below and hit the "Update" button</p>
+<p>
+  <span>Make the corrections to your post in the blanks below and hit the "Update" button</span>
+  <span id="post-Id">{{post.id}}</span>
+</p>
 
 <form class="form create-form">
   <div class="form-group">
-    <label for="Title">Title</label>
-    <input class="form-input" type="text" id="spark-title" value="{{post.title}}">
+    <label for="post-title">Title</label>
+    <input class="form-input" type="text" id="post-title" value="{{post.title}}">
   </div>
   <div class="form-group">
     <label for="post-text">Post Text</label>
     <textarea class="form-input" id="post-text" rows="20">{{post.text}}</textarea>
   </div>
+
+  <div class="form-group">
+    <button class="btn create" id="update" type="button">Update</button>
+  </div>
 </form>
- 
- 
-  
-   <div class="form-group">
-    <button class="btn create" id ="create" type="button">Update</button>
-</div>
-</div>
-</form>
+
 <script src="/js/update.js"></script>
 

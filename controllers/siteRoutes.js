@@ -42,11 +42,12 @@ router.get("/update/:id", async (req, res) => {
     console.log(JSON.stringify(post, null, 2));
     // res.status(200).json(post);
     res.render('update', {
-       post, 
-       loggedIn: req.session.loggedIn,
-       layout: 'main' });
+      post,
+      loggedIn: req.session.loggedIn,
+      layout: 'main',
+    });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
   }
 });
@@ -143,15 +144,10 @@ router.get('/update/:id', async (req, res) => {
       ],
     });
     const post = blogData.get({ plain: true });
-    // Send over the 'loggedIn' session variable to the 'homepage' template
     console.log(post);
-    res.status(200).json(post);
-    // res.render('homepage', {
-    //   post,
-    //   loggedIn: req.session.loggedIn,
-    // });
+    res.status(200).render('update', { post, loggedIn: req.session.loggedIn, layout: 'main' });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
   }
 });

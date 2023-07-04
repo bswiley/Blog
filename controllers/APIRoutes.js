@@ -1,5 +1,27 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Blog } = require('../models');
+
+router.put('/post/:id', async (req, res) => {
+  console.log("updating a post");
+  try {
+    const postData = await Blog.update(
+      {
+        title: req.body.title,
+        text: req.body.text
+      },
+      {
+        where: { id: req.params.id }
+      }
+    );
+
+    console.log(postData);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(404);
+  }
+});
+
 
 router.delete('/', async (req, res) => {
   try {
