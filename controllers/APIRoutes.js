@@ -56,29 +56,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.get('/update/:id', async (req, res) => {
-  try {
-    const blogData = await Blog.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-    });
-    const post = blogData.get({ plain: true });
-    // Send over the 'loggedIn' session variable to the 'homepage' template
-    console.log(post);
-    res.status(200).json(post);
-    // res.render('homepage', {
-    //   post,
-    //   loggedIn: req.session.loggedIn,
-    // });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
