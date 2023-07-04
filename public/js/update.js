@@ -1,7 +1,7 @@
 const updatePostFormHandler = async () => {
     const title = document.querySelector('#post-title').value.trim();
     const text = document.querySelector('#post-text').value.trim();
-    const id = document.querySelector('#post-Id').textContent.trim();
+    const id = document.querySelector('#hide').textContent.trim();
 
     try {
         const response = await fetch(`/api/post/${id}`, {

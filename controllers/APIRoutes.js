@@ -1,6 +1,21 @@
 const router = require('express').Router();
 const { User, Blog } = require('../models');
 
+router.post('/create', async (req, res) => {
+  try {
+    const postData = await Blog.create({
+      title: req.body.title,
+      text: req.body.text,
+      user_id: req.body.user_id,
+    });
+
+    res.status(200).json({ message: 'Post Created', postData });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
 router.put('/post/:id', async (req, res) => {
   console.log("updating a post");
   try {
