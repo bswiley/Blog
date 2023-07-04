@@ -1,7 +1,7 @@
 <div class="">
   <div class="card">
     <h3 class="card-title">{{post.title}}<h3>
-    <h5 class="card-date">{{post.date_created}}
+    <h5 class="card-date">{{format_date post.date_created}}
     </h5>
     <h5 class="card-user" id="author">
       <p>By: {{post.user.username}}</p>
