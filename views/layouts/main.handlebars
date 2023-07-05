@@ -15,10 +15,9 @@
     <a href="/dashboard">Dashboard</a>
     {{#if loggedIn}}
     <a href="/logout">Log Out</a>
-    {{/if}}
-    {{#unless loggedIn}}
+    {{else}}
    <a href="/login">Log In</a>
-   {{/unless}}
+   {{/if}}
   </nav>
  
     <h1>Tech Blog</h1>

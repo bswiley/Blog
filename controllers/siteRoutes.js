@@ -124,10 +124,14 @@ router.get("/mypost/:id", withAuth, async (req, res) => {
 //Dashboard Get
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
+    const user = await User.findByPk(req.session.user_id, {
+      attributes: ['username']
+    });
+
     const blogData = await Blog.findAll({
       where: { user_id: req.session.user_id },
       attributes: { exclude: ["password"] },
-      order:[['date_created','DESC']],
+      order: [['date_created', 'DESC']],
       include: [
         {
           model: User,
@@ -136,13 +140,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
       ],
     });
 
-    const posts = blogData.map((post) =>
-      post.get({ plain: true })
-    );
+    const posts = blogData.map((post) => post.get({ plain: true }));
+    const username = user ? user.username : null;
 
-    // res.status(200).json(posts);
     res.render('dashboard', {
       posts,
+      username,
       loggedIn: req.session.loggedIn,
       layout: "main"
     });
