@@ -1,6 +1,6 @@
 
 <aside>
-      <h2>{{posts.username}}'s Dashboard</h2>
+      <h2>{{posts.[0].user.username}}'s Dashboard</h2>
       <a href="/create/" class="create">Create Post</a>
 </aside>
 {{#each posts as |post|}}
@@ -11,14 +11,15 @@
             <span class="card-title">{{post.title}}</span> 
             <span class ="card-id">{{post.id}}</span>
             </h3>
-          <h4 class="card-body"></p>
+          <h4 class="card-body"></h4>
           <p class="card-text">
               {{post.text}}
-          </h4>
+              </p>
+        
            <div class="button-container">
     <a href="/mypost/{{post.id}}" class="view">View Comments</a>
     <a href="/update/{{post.id}}" class="update">Update</a>
-    <button class="delete">Delete</button>
+    <button class="delete" id="{{post.id}}">Delete</button>
   </div>
       </div>
   {{/each}}
