@@ -75,8 +75,8 @@ router.post('/comment/:id', async (req, res) => {
       blog_id: req.params.id,
     });
     console.log(conceptData.toJSON());
-    // res.status(204).json("");
-    res.redirect('/post/req.params.id');
+    res.status(204).json("");
+    // res.redirect('/post/req.params.id');
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
