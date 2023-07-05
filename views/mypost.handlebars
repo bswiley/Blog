@@ -1,0 +1,23 @@
+<div class="">
+  <div class="card">
+    <h3 class="card-title">{{post.title}}</h3>
+    <h5 class="card-date">{{format_date post.date_created}}</h5>
+    <h5 class="card-user" id="author">
+      <p>By: {{post.user.username}}</p>
+    </h5>
+    <p>Description: {{{post.text}}}</p>
+  </div>
+</div>
+
+<div>
+  <div class="cardholder">
+    <h3>Comments:</h3>
+    {{#each post.comments as |comment|}}
+      <div class="card">
+        <h6>Comment added {{format_date comment.date_created}} by {{comment.user.username}}</h6>
+        <p>{{comment.text}}</p>
+      </div>
+    {{/each}}
+  </div>
+</div>
+   

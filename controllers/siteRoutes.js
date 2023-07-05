@@ -53,6 +53,7 @@ router.get("/update/:id", withAuth, async (req, res) => {
   }
 });
 
+//handles populating a post when clicked on from homescreen
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
@@ -77,6 +78,40 @@ router.get("/post/:id", withAuth, async (req, res) => {
     console.log(JSON.stringify(req.session.loggedIn, null, 2));
     // res.status(200).json(post);
     res.render('post', {
+      post, 
+      loggedIn: req.session.loggedIn,
+      layout: 'main'
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+//handles populating a post when clicked on from dashboard
+router.get("/mypost/:id", withAuth, async (req, res) => {
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          attributes: ['text', 'date_created'],
+          include: [
+            { 
+              model: User,
+              attributes: ['username'],
+            }
+          ]
+        }
+      ]
+    });
+    const post = blogData.get({ plain: true });
+    console.log(JSON.stringify(req.session.loggedIn, null, 2));
+    // res.status(200).json(post);
+    res.render('mypost', {
       post, 
       loggedIn: req.session.loggedIn,
       layout: 'main'
