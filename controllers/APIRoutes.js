@@ -141,6 +141,28 @@ router.delete('/', async (req, res) => {
   }
 });
 
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const deletedPost = await Blog.destroy({
+      where: {
+        id: postId,
+        user_id: req.session.user_id, // Make sure only the owner can delete the post
+      },
+    });
+
+    if (!deletedPost) {
+      res.status(404).json({ message: 'Post not found or you are not authorized to delete it' });
+      return;
+    }
+
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while deleting the post' });
+  }
+});
+
 // router.post('/login', async (req, res) => {
 //   try {
 //     const userData = await User.findOne({ where: { email: req.body.email } });
