@@ -6,6 +6,7 @@ const { Blog, Comment, User } = require('../models');
 router.get('/',  async (req, res) => {
   try {
     const blogData = await Blog.findAll({
+      order: [['date_created','DESC']],
       include: [
         {
           model: User,
@@ -39,7 +40,7 @@ router.get("/update/:id", withAuth, async (req, res) => {
       ]
     });
     const post = blogData.get({ plain: true });
-    console.log(JSON.stringify(post, null, 2));
+    console.log(JSON.stringify(post, null, 2));;
     // res.status(200).json(post);
     res.render('update', {
       post,
@@ -52,7 +53,6 @@ router.get("/update/:id", withAuth, async (req, res) => {
   }
 });
 
-// GET one blog
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
@@ -74,12 +74,13 @@ router.get("/post/:id", withAuth, async (req, res) => {
       ]
     });
     const post = blogData.get({ plain: true });
-    console.log(JSON.stringify(loggedIn, null, 2));
+    console.log(JSON.stringify(req.session.loggedIn, null, 2));
     // res.status(200).json(post);
     res.render('post', {
-       post, 
-       loggedIn: req.session.loggedIn,
-       layout: 'main' });
+      post, 
+      loggedIn: req.session.loggedIn,
+      layout: 'main'
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -91,6 +92,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const blogData = await Blog.findAll({
       where: { user_id: req.session.user_id },
       attributes: { exclude: ["password"] },
+      order:[['date_created','DESC']],
       include: [
         {
           model: User,

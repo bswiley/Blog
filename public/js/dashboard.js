@@ -6,7 +6,7 @@ buttonSets.forEach((buttonSet) => {
   deleteButton.addEventListener('click', async () => {
       // Retrieve information from the card associated with the clicked button
       const title = buttonSet.querySelector('.card-title').textContent;
-      const id = buttonSet.querySelector('.card-id').textContent;
+      const user_id = buttonSet.querySelector('.card-id').textContent;
       const text = buttonSet.querySelector('.card-text').textContent;
 
       try {

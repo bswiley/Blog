@@ -13,7 +13,7 @@ Comment.init(
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      defaultValue: "",
     },
     text: {
       type: DataTypes.TEXT,
@@ -32,13 +32,13 @@ Comment.init(
       },
     },
     blog_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'blog',
-          key: 'id',
-        },
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'blog',
+        key: 'id',
+      },
     },
-},
+  },
   {
     sequelize,
     timestamps: false,

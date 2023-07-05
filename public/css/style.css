@@ -23,6 +23,7 @@
 }
 
 /* CSS */
+.button,
 .view {
     -webkit-appearance: button;
     -moz-appearance: button;

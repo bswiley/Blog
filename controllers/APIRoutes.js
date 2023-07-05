@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Blog } = require('../models');
+const { User, Blog, Comment } = require('../models');
 
 
 //Handle signup POST request
@@ -63,6 +63,27 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//handle create comment to post
+router.post('/comment/:id', async (req, res) => {
+  console.log(`post request to comments`);
+  console.log(`"text": ${req.body}, "user_id": ${req.session.user_id}, "blog_id": ${req.params.id}`);
+
+  try {
+    const conceptData = await Comment.create({
+      text: req.body.text,
+      user_id: req.session.user_id,
+      blog_id: req.params.id,
+    });
+    console.log(conceptData.toJSON());
+    // res.status(204).json("");
+    res.redirect('/post/req.params.id');
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+
+});
+
 
 //handle create new post, POST request
 router.post('/create', async (req, res) => {
@@ -73,7 +94,9 @@ router.post('/create', async (req, res) => {
       user_id: req.body.user_id,
     });
 
-    res.status(200).json({ message: 'Post Created', postData });
+    res.redirect('/dashboard');
+
+
   } catch (err) {
     console.error(err);
     res.sendStatus(500);

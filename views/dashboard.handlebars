@@ -1,9 +1,9 @@
-{{#each posts as |post|}}
+
 <aside>
-      <h2>{{post.user.username}}'s Dashboard</h2>
+      <h2>{{post.username}}'s Dashboard</h2>
       <a href="/create/" class="create">Create Post</a>
 </aside>
-
+{{#each posts as |post|}}
 <div class="blogpost-div">
   <!--Is our Menu for selection here? -->
       <div class="card">
