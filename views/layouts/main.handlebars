@@ -13,10 +13,10 @@
    <nav>
     <a href="/">Home</a>
     <a href="/dashboard">Dashboard</a>
-    {{#if req.session.logged_in}}
+    {{#if loggedIn}}
     <a href="/logout">Log Out</a>
     {{/if}}
-    {{#unless req.session.logged_in}}
+    {{#unless loggedIn}}
    <a href="/login">Log In</a>
    {{/unless}}
   </nav>

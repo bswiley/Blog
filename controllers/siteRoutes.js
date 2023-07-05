@@ -74,7 +74,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
       ]
     });
     const post = blogData.get({ plain: true });
-    console.log(JSON.stringify(post, null, 2));
+    console.log(JSON.stringify(loggedIn, null, 2));
     // res.status(200).json(post);
     res.render('post', {
        post, 

@@ -8,7 +8,7 @@ const loginFormHandler = async (event) => {
 //We currently have seeds/userdata.json
 
   if (email && password) {
-    const response = await fetch('/api/users/login', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ const loginFormHandler = async (event) => {
   }
 };
 const signupFormHandler = async (event) => {
-  event.preventDefault();
+  event.preventDefault(event);
   console.log('signup pushed');
   
 
@@ -31,7 +31,7 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
 
   if (username && email && password) {
-    const response = await fetch('/api/users/signup', {
+    const response = await fetch('/api/signup', {
       method: 'POST',
       body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },

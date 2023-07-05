@@ -1,58 +1,36 @@
 const router = require('express').Router();
 const { User, Blog } = require('../models');
 
-router.post('/create', async (req, res) => {
-  try {
-    const postData = await Blog.create({
-      title: req.body.title,
-      text: req.body.text,
-      user_id: req.body.user_id,
-    });
 
-    res.status(200).json({ message: 'Post Created', postData });
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+//Handle signup POST request
+router.post('/signup', async (req, res) => {
+  try {
+    const checkData = await User.findOne({ where: { email: req.body.email } });
+    console.log(checkData);
+    if (checkData != null) {
+      res.status(403).json("Email already exists");
+      return;
+    } else if (req.body.password.length < 8) {
+      res.status(403).json("Password error: Password should be at least 8 characters long");
+      return;
+    } else {
+      console.log(req.body);
+      const { username, email, password } = req.body; 
+              const userData = await User.create({ username, email, password }); // Pass email and password as separate properties
+      req.session.save(() => {
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
+      
+        res.status(200).json({ user: userData, message: 'You are now signed up and logged in!' });
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("An error occurred while signing up");
   }
 });
 
-router.put('/post/:id', async (req, res) => {
-  console.log("updating a post");
-  try {
-    const postData = await Blog.update(
-      {
-        title: req.body.title,
-        text: req.body.text
-      },
-      {
-        where: { id: req.params.id }
-      }
-    );
-
-    console.log(postData);
-    res.sendStatus(204);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500); 
-  }
-});
-
-
-router.delete('/', async (req, res) => {
-  try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
+// Handle login POST request
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -84,14 +62,101 @@ router.post('/login', async (req, res) => {
     res.status(400).json(err);
   }
 });
-router.post('/signup', async (req, res) => {
+
+
+//handle create new post, POST request
+router.post('/create', async (req, res) => {
+  try {
+    const postData = await Blog.create({
+      title: req.body.title,
+      text: req.body.text,
+      user_id: req.body.user_id,
+    });
+
+    res.status(200).json({ message: 'Post Created', postData });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+//handle update a post, PUT request
+router.put('/post/:id', async (req, res) => {
+  console.log("updating a post");
+  try {
+    const postData = await Blog.update(
+      {
+        title: req.body.title,
+        text: req.body.text
+      },
+      {
+        where: { id: req.params.id }
+      }
+    );
+
+    console.log(postData);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500); 
+  }
+});
+
+//handle delete a post, DELETE request
+router.delete('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
-    res.status(200).json(userData);
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.status(200).json(userData);
+    });
   } catch (err) {
     res.status(400).json(err);
   }
 });
+
+// router.post('/login', async (req, res) => {
+//   try {
+//     const userData = await User.findOne({ where: { email: req.body.email } });
+
+//     if (!userData) {
+//       res
+//         .status(400)
+//         .json({ message: 'Incorrect email or password, please try again' });
+//       return;
+//     }
+
+//     const validPassword = await userData.checkPassword(req.body.password);
+
+//     if (!validPassword) {
+//       res
+//         .status(400)
+//         .json({ message: 'Incorrect email or password, please try again' });
+//       return;
+//     }
+
+//     req.session.save(() => {
+//       req.session.user_id = userData.id;
+//       req.session.logged_in = true;
+      
+//       res.json({ user: userData, message: 'You are now logged in!' });
+//     });
+
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
+// router.post('/signup', async (req, res) => {
+//   try {
+//     const userData = await User.create(req.body);
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
 
 
