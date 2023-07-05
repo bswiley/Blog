@@ -89,7 +89,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findAll({
-      where: { user_id: 3 },
+      where: { user_id: req.session.user_id },
       attributes: { exclude: ["password"] },
       include: [
         {
@@ -98,12 +98,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
         },
       ],
     });
+
     const posts = blogData.map((post) =>
       post.get({ plain: true })
     );
-    // Send over the 'loggedIn' session variable to the 'homepage' template
-    console.log(posts);
-    // res.status(200).json(post);
+
+    // res.status(200).json(posts);
     res.render('dashboard', {
       posts,
       loggedIn: req.session.loggedIn,
@@ -118,7 +118,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 //Create new Post Get
 router.get('/create', withAuth, async (req, res) => {
   try {
-    const blogData = await User.findByPk(3);
+    const blogData = await User.findByPk(req.session.user_id);
     const users = blogData.get({ plain: true });
     // res.status(200).json(users);
     res.render('create', { 

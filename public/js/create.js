@@ -1,4 +1,4 @@
-onst makePostFormHandler = async (event) => {
+const makePostFormHandler = async (event) => {
     event.preventDefault();
   
     const title = document.querySelector('#post-title').value.trim();
