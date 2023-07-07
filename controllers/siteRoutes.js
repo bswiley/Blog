@@ -163,7 +163,7 @@ router.get('/create', withAuth, async (req, res) => {
     // res.status(200).json(users);
     res.render('create', { 
       users,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
       layout: 'main' 
     });
   } catch (err) {
@@ -174,7 +174,7 @@ router.get('/create', withAuth, async (req, res) => {
 
 router.get('/login' ,async (req,res) => {
 res.render('login', {
-logged_in: req.session.logged_in,
+loggedIn: req.session.loggedIn,
 layout: 'main'
 })}) 
 //Update Post by id Get
