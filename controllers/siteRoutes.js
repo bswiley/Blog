@@ -3,7 +3,7 @@ const withAuth = require('../utils/auth');
 const { Blog, Comment, User } = require('../models');
 
 // GET all blogs for homepage
-router.get('/',  async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const blogData = await Blog.findAll({
       order: [['date_created','DESC']],

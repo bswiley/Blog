@@ -7,6 +7,34 @@
   <title>Tech Blog</title>
     <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="/css/style.css">
+  <script>
+  function logout() {
+    // Send a POST request to '/api/logout'
+    fetch('/api/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // Optionally, include any data in the request body
+      // body: JSON.stringify({ key: value })
+    })
+    .then(response => {
+      // Handle the response
+      if (response.ok) {
+        // Logout successful
+        alert('Logout successful!');
+        document.location.replace('/');
+      } else {
+        // Logout failed
+        alert('Logout failed!');
+      }
+    })
+    .catch(error => {
+      // Handle any errors
+      console.error('Error:', error);
+    });
+  }
+</script>
 </head>
 
 <body> <header>
@@ -14,7 +42,7 @@
     <a href="/">Home</a>
     <a href="/dashboard">Dashboard</a>
     {{#if loggedIn}}
-    <a href="/logout">Log Out</a>
+    <a href="#" onclick="logout()">Log Out</a>
     {{else}}
    <a href="/login">Log In</a>
    {{/if}}
@@ -30,5 +58,6 @@
     </div>
   </main>
 </body>
-
+<script>
+  
 </html>
