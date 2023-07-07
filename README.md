@@ -1,96 +1,57 @@
-# Module 14 Mini-Project: Crowdfunding App
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-In this mini-project, you will work with a group to build a full-stack crowdfunding app using Node.js, Express.js, Sequelize, Handlebars.js, and MVC architecture.
+# (Tech) Blog
 
-## User Stories
+## Description
 
-* As a user, I want to see a list of current projects seeking funding.
+This project is a full stack project that uses node.js, express.js, mysql, sequelize, and handlebars to build up the project.  The project itself is in the same directory as this README.md file for download and use, while a live version is deployed [here](https://blog-of-things-tech-9bcc541378b3.herokuapp.com/). If the link doesn't work or you wish to use the site in a local server, you can clone the project and deploy it or use it locally.  The purpose of the application was to create a full-stack blog application.  As it was built and has been used, the blog was meant to share articles which explain and technology concepts, describe techological developments, or advance ideas related to the advancement of technology.  As a blog, it can be used for any other similar purpose because, at root, it is an application in which users can create user accounts, write articles, and comment on the articles of others.  This basic function can work in a variety of environments. 
 
-* As a user, I want to be able to create an account.
+ ## Table of Contents
 
-* As a registered user, I want to post my own projects to ask for funding.
+[Installation](#Installation)
 
-### Acceptance Criteria
+[Usage](#Usage)
 
-* It's done when the `/` homepage route renders a list of all projects from the database.
+[Contributing](#Contributing)
 
-* It's done when the `/project/:id` route renders an individual project's details based on the route parameter id.
+[Tests](#Tests)
 
-* It's done when the `/login` route renders a form to log in and a form to create a new account.
+[License](#License)
 
-* It's done when an existing user can enter their credentials on the login page to create a session on the server.
+[Questions](#Questions)
 
-* It's done when a new user can create an account on the login page and then be immediately logged in with a session.
+## Installation
+Prerequisites are that you must already have node.js and mysql installed on your system.  
 
-* It's done when the `/profile` route renders the logged-in user's projects and a form to create a new project.
+To install locally please follow the following steps:
+1. Clone the directory 
+2. Run "npm install" in the terminal to install all the required dependencies  
+3. Fill the .env file needs to be filled out according to your local system
+4. "SOURCE" the db/schema.sql file in mysql and then type "npm run seed" in node.js. 
+5. You can change the data in blog_db to fit your own needs and change the blog title in the main.handlbars page. 
+6. Run "npm start"  in node.js to start the application.  
 
-* It's done when only a logged in user can visit the `/profile` route.
 
-* It's done when a logged in user is redirected to `/profile` when they try to visit `/login` again.
 
-* It's done when a user on the profile page can use the form to create a new project in the database.
+## Usage
+To use the application either navigate to the public[ heroku url](https://blog-of-things-tech-9bcc541378b3.herokuapp.com/)  or use "localhost:3001" for the local copy if you followed the directions in the "installation" section. 
 
-* It's done when a user on the profile page can select a "Delete" button to remove their project from the database.
+After navigating to the home page you will be required to login or create an account. To make an account you need to use an unique email and a password thats at least 8 letters long.
 
-* It's done when a logged-in user can select a "Logout" button to remove their session.
+After you login you can click on all the links and explore the content that is there and comment on the posts or go to your "dashboard" and create your own blog post.  Also from the "dashboard" you can update or delete one of your own blogs as well as look at the comments others have made on your posts (this can also be done by simply clicking on one of the titles in the home page).
 
-* It's done when the session for a logged-in user expires after a set time.
 
-* It's done when the API routes to create and delete posts are protected from non logged-in users.
 
-* It's done when the code is organized using MVC architecture.
+## Tests
+There are no pre-prepared tests that have been created to test the application.  
 
-* It's done when the views are rendered with Handlebars.js templates.
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Specifications 
+## Questions/Comments
+If you have any questions, comments or advice on the project feel free to write me at the email address listed below.  
 
-* The database models have the following fields and associations:
+## Contributing
+I have not created an initial splash page for the site, and intend to work on that in the future. 
 
-  * `User`
-
-    * `id`: primary key
-
-    * `name`
-
-    * `email`
-
-    * `password`
-
-  * `Project`
-
-    * `id`: primary key
-
-    * `name`
-
-    * `description`
-
-    * `date_created`
-
-    * `needed_funding`
-
-    * `user_id`: foreign key that references `User.id`
-
-  * Users have many projects, and projects belong to a user.
-
-    * If a user is deleted, all associated projects are also deleted.
-
----
-
-## 💡 Hints
-
-* What tools can you use to test the existing API routes if you don't yet have a front end?
-
-* Where would you place the client-side JavaScript for capturing form data?
-
-* How can middleware help protect routes from non logged-in users?
-
-* How can Handlebars.js helpers (both built-in and custom) be used to render the desired results?
-
-## 🏆 Bonus
-
-If you have completed this activity, work through the following challenge with your partner to further your knowledge:
-
-* Add an `/edit/:id` route for logged in users to update their projects' details. Then deploy the app to Heroku!
-
----
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+If one would like to contribute to the repository for that or any other reason feel free to email Brian Wiley at bswiley@gmail.com.  
